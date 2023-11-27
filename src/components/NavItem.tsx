@@ -48,7 +48,7 @@ function NavItem({ category, handleOpen, isOpen, isAnyOpen }: NavbarProps) {
                                         fill
                                     />
                                 </div>
-                                <Link href={feature.href} className='mt-6 block font-medium text-violet-950 dark:text-secondary'>
+                                <Link href={feature.href} className='mt-6 block font-medium text-muted-foreground text-lg rounded-md hover:text-primary transition-all'>
                                     {feature.name}
                                 </Link>
                                 <p aria-hidden={true} className='text-base'>Shop now</p>
