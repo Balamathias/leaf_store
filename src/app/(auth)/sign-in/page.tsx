@@ -23,7 +23,6 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { toast } from "sonner"
 
 
-
 function SignIn() {
 
   const router = useRouter()
@@ -47,10 +46,9 @@ function SignIn() {
       password: values.password
     }, {
       onSuccess: () => {
+        
         toast.success("Signed In Successfully.")
-
-        router.refresh()
-
+        
         if (origin) {
           router.push(`${origin}`)
           return
@@ -61,6 +59,7 @@ function SignIn() {
           return
         }
 
+        router.refresh()
         router.push('/')
       },
 
