@@ -5,9 +5,15 @@ import NavItems from "./NavItems"
 import { ModeToggle } from "@/utils/ModeToggle"
 import { buttonVariants } from "./ui/button"
 import Cart from "./Cart"
+import { cookies } from 'next/headers'
+import { getServerSideUser } from "@/lib/payload-utils"
+import UserAccountNav from "./UserAccountNavigation"
 
-const Navbar = () => {
-  const user = null
+const Navbar = async () => {
+  
+  const nextCookies = cookies()
+  const { user } = await getServerSideUser(nextCookies)
+
   return (
     <nav className="sticky z-50 bg-blend-darken bg-muted top-0 inset-x-0 h-16">
         <section className="bg-blend-darken bg-muted relative">
@@ -36,7 +42,7 @@ const Navbar = () => {
                             <span className="h-6 bg-foreground w-px"></span>
                         )}
 
-                        {user && <></>}
+                        {user ? <UserAccountNav user={user} /> : null}
 
                         {!user && (
                             <Link className={buttonVariants({variant: "default"})} href={'/sign-up'}>

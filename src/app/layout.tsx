@@ -4,6 +4,8 @@ import './globals.css'
 import { cn } from '@/lib/utils'
 import { ThemeProvider } from './theme-provider'
 import Navbar from '@/components/Navbar'
+import Providers from '@/components/Providers'
+import { Toaster } from 'sonner'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,6 +19,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  
   return (
     <html lang="en" className='h-full'>
       <body className={cn("relative h-full antialiased", inter.className)}>
@@ -26,12 +29,15 @@ export default function RootLayout({
               enableSystem
               disableTransitionOnChange
             >
-          <main className="relative flex flex-col min-h-screen">
-            <Navbar />
-            <div className="flex-1 flex-grow">
-              {children}
-            </div>
-          </main>
+          <Providers>
+            <main className="relative flex flex-col min-h-screen">
+              <Navbar />
+              <div className="flex-1 flex-grow">
+                {children}
+              </div>
+              <Toaster position='top-right' richColors theme='system' />
+            </main>
+          </Providers>
         </ThemeProvider>
       </body>
     </html>
