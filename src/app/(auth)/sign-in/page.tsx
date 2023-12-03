@@ -38,13 +38,8 @@ function SignIn() {
     },
   })
 
-  const { mutate, isLoading  } = trpc.auth.signIn.useMutation()
- 
-  function onSubmit(values: z.infer<typeof SignInValidation>) {
-    mutate({
-      email: values.email,
-      password: values.password
-    }, {
+  const { mutate, isLoading  } = trpc.auth.signIn.useMutation(
+    {
       onSuccess: () => {
         
         toast.success("Signed In Successfully.")
@@ -77,6 +72,13 @@ function SignIn() {
         toast.error("Something went wrong, please check your internet connection and try again")
         return
       }
+    }
+  )
+ 
+  function onSubmit(values: z.infer<typeof SignInValidation>) {
+    mutate({
+      email: values.email,
+      password: values.password
     })
   }
 

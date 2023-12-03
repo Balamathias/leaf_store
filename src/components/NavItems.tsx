@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react"
 import NavItem from "./NavItem"
 import { useOnClickOutside } from "@/hooks/use_onclick_outside"
 
-
 const NavItems = () => {
 
   const [activeIndex, setActiveIndex] = useState<null | number>(null)

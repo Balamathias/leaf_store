@@ -3,7 +3,6 @@
 import {
     Sheet,
     SheetContent,
-    SheetDescription,
     SheetFooter,
     SheetHeader,
     SheetTitle,
@@ -17,28 +16,45 @@ import { ArrowBigRightDashIcon } from 'lucide-react'
 import Image from "next/image"
 import { buttonVariants } from "./ui/button"
 import Link from "next/link"
+import { useCart } from "@/hooks/use-cart"
+import CartItem from "./CartItem"
+import { ScrollArea } from "./ui/scroll-area"
+import { useEffect, useState } from "react"
 
 const Cart = () => {
-  const itemsCount = 2
+  const {items} = useCart()
+  const cartTotal = items.reduce((total, {product}) => total + product.price, 0)
+  const itemsCount = items.length
+  const [isMounted, setIsMounted] = useState(false)
+
+useEffect(() => {
+    setIsMounted(true)
+}, [])
+
+// if (!isMounted) return null
   const fee = 10
   return (
     <Sheet>
         <SheetTrigger className="flex items-center gap-1 group">
             <ShoppingCart className="w-6 h-6 text-muted-foreground group-hover:text-primary" />
-            <span className="group-autofill:text-muted">(0)</span>
+            <span className="group-autofill:text-muted">({isMounted ? itemsCount : 0})</span>
         </SheetTrigger>
         <SheetContent className="md:max-w-lg flex flex-col gap-3">
             <SheetHeader>
                 <SheetTitle>
-                    Cart (0)
+                    Cart ({itemsCount})
                 </SheetTitle>
             </SheetHeader>
             <>
                 {itemsCount > 0 ? (<div className="flex flex-col gap-3">
                 
-                    <div>
-                        Cart Items
-                    </div>
+                    <ScrollArea>
+                    {
+                      items.map(({product}) => 
+                        <CartItem product={product} key={product.id} />
+                        )
+                    }
+                   </ScrollArea>
                     <Separator />
                     <div className="flex justify-between items-center">
                         <span>Delivery</span>
@@ -50,7 +66,7 @@ const Cart = () => {
                     </div>
                     <div className="flex justify-between gap-2 items-center">
                         <span className="font-md text-primary">Total</span>
-                        <span>{formatPrice(fee)}</span>
+                        <span>{formatPrice(cartTotal + fee)}</span>
                     </div>
                     <SheetFooter className="w-full space-y-6">
                         <SheetTrigger asChild>
