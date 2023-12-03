@@ -8,6 +8,7 @@ import { IncomingMessage } from 'http'
 import bodyParser from 'body-parser'
 import { stripeWebhookHandler } from './webhooks'
 import nextBuild from 'next/dist/build'
+import path from 'path'
 
 
 const app = express()
@@ -58,7 +59,7 @@ export type WebhookRequest = IncomingMessage & {
     
         return
       }
-      
+
     app.use( '/api/trpc',
     trpcExpress.createExpressMiddleware({
       router: appRouter,
