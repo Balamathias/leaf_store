@@ -70,6 +70,7 @@ var trpc_1 = require("./trpc");
 var body_parser_1 = __importDefault(require("body-parser"));
 var webhooks_1 = require("./webhooks");
 var build_1 = __importDefault(require("next/dist/build"));
+var path_1 = __importDefault(require("path"));
 var app = (0, express_1.default)();
 var PORT = Number(process.env.PORT) || 3000;
 var createContext = function (_a) {
@@ -107,7 +108,7 @@ var start = function () { return __awaiter(void 0, void 0, void 0, function () {
                                 case 0:
                                     payload.logger.info('Next.js is building for production');
                                     // @ts-expect-error
-                                    return [4 /*yield*/, (0, build_1.default)(path.join(__dirname, '../'))];
+                                    return [4 /*yield*/, (0, build_1.default)(path_1.default.join(__dirname, '../'))];
                                 case 1:
                                     // @ts-expect-error
                                     _a.sent();
