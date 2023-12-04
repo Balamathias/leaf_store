@@ -1,6 +1,5 @@
 import express from 'express'
 import { getPayloadClient } from './get-payloads'
-// import { nextApp, nextHandler } from './next-utils'
 import * as trpcExpress from '@trpc/server/adapters/express'
 import { appRouter } from './trpc'
 import { inferAsyncReturnType } from '@trpc/server'

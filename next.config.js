@@ -8,6 +8,12 @@ const nextConfig = {
             pathname: '**',
             port: '3000',
           },
+          {
+            protocol: 'https',
+            hostname: 'matie-store.vercel.app',
+            pathname: '**',
+            port: '0000',
+          },
         ],
       },
 }
