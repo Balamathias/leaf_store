@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production PAYLOAD_CONFIG_PATH=src/payload.config.ts nodemon",
-    "build:payload": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production PAYLOAD_CONFIG_PATH=src/payload.config.ts payload build",
+    "dev": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts nodemon",
+    "build:payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload build",
     "build:server": "tsc --project tsconfig.server.json",
-    "build:next": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production PAYLOAD_CONFIG_PATH=dist/payload.config.js NEXT_BUILD=true node dist/server.js",
-    "build": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production NODE_ENV=production npm run build:payload && npm run build:server && npm run copyfiles && npm run build:next",
-    "start": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production PAYLOAD_CONFIG_PATH=dist/payload.config.js NODE_ENV=production node dist/server.js",
+    "build:next": "cross-env PAYLOAD_CONFIG_PATH=dist/payload.config.js NEXT_BUILD=true node dist/server.js",
+    "build": "cross-env NODE_ENV=production npm run build:payload && npm run build:server && npm run copyfiles && npm run build:next",
+    "start": "cross-env PAYLOAD_CONFIG_PATH=dist/payload.config.js NODE_ENV=production node dist/server.js",
     "copyfiles": "copyfiles -u 1 \"src/**/*.{html,css,scss,ttf,woff,woff2,eot,svg,jpg,png}\" dist/"
   },
   "resolutions": {
